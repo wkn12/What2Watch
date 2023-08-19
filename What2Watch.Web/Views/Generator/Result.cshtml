@@ -1,0 +1,35 @@
+﻿@model MovieWithCreditsViewModel;
+
+@if (ViewData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewData["Error"]
+    </div>
+}
+else
+{
+    <div class="d-grid container">
+        <div class="row gy-2">
+            <div class="col-md-6">
+                <form asp-action="AddToList" asp-controller="List">
+
+                    <input type="hidden" name="id" value="@Model.MovieDetails.Id" />
+                    <input type="hidden" name="title" value="@Model.MovieDetails.Title.Title" />
+
+
+                    <button class="btn btn-success w-100 " type="submit">Add to List</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form asp-action="Generate" asp-controller="Generator">
+                    @if (Model.ShowCast)
+                    {
+                        <input type="hidden" name="showCast" value="true" checked="checked" id="showCast"/>    
+                    }
+                    <button class="btn btn-primary w-100" type="submit" name="showType" value="@ViewBag.Type">Next</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @Html.DisplayForModel("MovieDetails")
+}

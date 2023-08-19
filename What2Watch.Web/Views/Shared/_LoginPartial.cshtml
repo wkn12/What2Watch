@@ -1,0 +1,23 @@
+﻿@if (Context.Request.Cookies["Token"] != null)
+{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="list" asp-action="index">My list</a>
+        </li>
+        <li class="nav-item">      
+            <a class="nav-link" asp-controller="auth" asp-action="logout">Logout</a>
+        </li>
+        </ul>
+    }
+    else
+    {
+        
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="auth" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="auth" asp-action="Register">Register</a>
+        </li>
+    </ul>
+    }

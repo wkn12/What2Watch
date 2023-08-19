@@ -1,0 +1,16 @@
+﻿global using What2Watch.Services.DataServices.Api;
+global using What2Watch.Services.DataServices.Interfaces;
+global using What2Watch.Services.DataServices;
+global using What2Watch.Models.Models;
+global using What2Watch.Web.Models;
+global using What2Watch.Services.Logging.Configuration;
+global using What2Watch.Services.Logging.Interfaces;
+global using Microsoft.AspNetCore.Mvc;
+global using Newtonsoft.Json;
+global using System.IdentityModel.Tokens.Jwt;
+global using What2Watch.Web.Utils;
+global using What2Watch.Web.Middleware;
+global using System.Net;
+global using What2Watch.Models.Entities;
+global using System.Diagnostics;
+global using What2Watch.Api.Filters;

@@ -1,0 +1,15 @@
+﻿
+<h1>Generator</h1>
+<form asp-action="Generate" asp-controller="Generator">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="true" name="showCast" id="showCast">
+            <label class="form-check-label"  for="showCast">
+                Show cast
+            </label>
+        </div>
+    <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+        <button type="submit" name="showType" class="btn btn-outline-primary" value="@ShowTypeEnum.Movie">Generate Movie</button>
+        <button type="submit" name="showType" class="btn btn-outline-primary" value="@ShowTypeEnum.TvShow">Generate Tv Show</button>
+        <button type="submit" name="showType" class="btn btn-outline-primary" value="@ShowTypeEnum.Both">Generate Movie or Tv Show</button>
+    </div>
+</form>

@@ -1,0 +1,16 @@
+﻿@model MovieWithCreditsViewModel;
+@if(ViewData["Error"]!=null){
+    <div class="alert alert-danger" role="alert">
+        @ViewData["Error"]
+    </div>
+}
+else
+{
+    
+<form asp-action="AddToList" asp-controller="List">
+    <input type="hidden" name="id" value="@Model.MovieDetails.Id" />
+    <input type="hidden" name="title" value="@Model.MovieDetails.Title.Title" />
+    <button class="btn btn-success w-100 " type="submit">Add to List</button>
+</form>
+@Html.DisplayForModel("MovieDetails")
+}

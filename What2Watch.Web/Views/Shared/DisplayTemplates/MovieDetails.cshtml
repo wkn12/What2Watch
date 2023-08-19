@@ -1,0 +1,75 @@
+﻿@model MovieWithCreditsViewModel;
+
+<div class="mt-3 d-grid mb-5">
+    <div class="row gy-2">
+        <div class="col-lg-6 p-0">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h1>@Model.MovieDetails.Title.Title</h1>
+                    <h3 class="ms-1" style="color:dimgrey">@Model.MovieDetails.Title.Year</h3>
+                </div>
+                <div>
+                    @if (@Model.MovieDetails.Ratings.CanRate)
+                    {
+                        <h1>@Model.MovieDetails.Ratings.Rating <i style="color:goldenrod" class="fas fa-star"></i></h1>
+                        <h5 class="ms-1" style="color:dimgrey">@Model.MovieDetails.Ratings.RatingCount</h5>
+                    }
+                </div>
+            </div>
+            <hr />
+            <div class="mb-3">
+                @foreach (var genre in @Model.MovieDetails.Genres)
+                {
+                    <span class="h4"><span class="badge rounded-pill text-bg-primary">@genre</span></span>
+                }
+            </div>
+            <div>
+                @if (@Model.MovieDetails.PlotSummary != null)
+                {
+                    @Model.MovieDetails.PlotSummary.Text
+                }
+                else
+                {
+                    @Model.MovieDetails.PlotOutline.Text
+                }
+            </div>
+            <div class="mt-3">
+                <table class="table">
+                    <tr>
+                        <th>Length</th>
+                        <td>@Model.MovieDetails.Title.RunningTimeInMinutes m</td>
+                    </tr>
+                    @if (@Model.MovieDetails.Title.TitleType == "tvSeries")
+                    {
+                     <tr>
+                        <th>Number of Episodes</th>
+                        <td>@Model.MovieDetails.Title.NumberOfEpisodes</td>
+                    </tr>   
+                    }
+                    <tr>
+                        <th>Realese date</th>
+                        <td>@Model.MovieDetails.ReleaseDate</td>
+                    </tr>
+                    @if (Model.Credits != null)
+                    {   
+                    <tr>
+                        <th>Director</th>
+                        <td>@Model.Credits.Crew.Director.FirstOrDefault().Name</td>
+                    </tr>
+                    }
+                </table>
+            </div>
+            <div class="mt-3">
+                @if (Model.Credits != null)
+                { 
+                     <partial name="Partials/_CastListPartial" model="@Model.Credits.Cast" />
+                }
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img class="img-fluid" src="@Model.MovieDetails.Title.Image.Url" width="@Model.MovieDetails.Title.Image.Width" 
+            height="@Model.MovieDetails.Title.Image.Height" alt="poster" />
+        </div>
+    </div>
+</div>

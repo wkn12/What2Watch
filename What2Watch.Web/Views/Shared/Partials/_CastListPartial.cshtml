@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Cast>
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Cast
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <table class="table">
+
+                    @foreach (var person in @Model)
+                    {
+                        <tr>
+                            <td>
+                                    <div class="castImg">
+                                @if (@person.Image != null)
+                                {
+                                         <img class="img-thumbnail"
+                                             style="width: 80px; height: 80px" src="@person.Image.Url" />
+                                }
+                                else
+                                {
+                                     <img class="img-thumbnail"
+                                             style="width: 80px; height: 80px" src="https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg" />
+                                }
+                                    </div>
+                            </td>
+                            <td>
+                                <h3>@person.Name</h3>
+                                @if (@person.Characters != null)
+                                {
+                                    
+                                @foreach (var role in @person.Characters)
+                                {
+                                    <p style="color:lightslategrey">@role</p>
+                                }
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

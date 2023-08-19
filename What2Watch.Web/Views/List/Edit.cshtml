@@ -1,0 +1,82 @@
+﻿@model UserMovieList
+@{
+    MovieDetails movie = ViewBag.Movie;
+}
+<div class="mt-3 d-grid mb-5">
+    <div class="row gy-2">
+        <div class="col-lg-6 p-0">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h1>@movie.Title.Title</h1>
+                    <h3 class="ms-1" style="color:dimgrey">@movie.Title.Year</h3>
+                </div>
+                <div>
+                    @if (movie.Ratings.CanRate)
+                    {
+                        <h1>@movie.Ratings.Rating <i style="color:goldenrod" class="fas fa-star"></i></h1>
+                        <h5 class="ms-1" style="color:dimgrey">@movie.Ratings.RatingCount</h5>
+                    }
+                </div>
+            </div>
+            <hr />
+            <div class="w-75">
+                <form asp-action="Update" asp-controller="list">
+                    @Html.EditorForModel("UserMovie")
+                    <button type="submit" class="btn btn-primary mt-2">Update</button>
+                </form>
+                <hr />
+            </div>
+            <div class="mb-3">
+
+                @foreach (var genre in @movie.Genres)
+                {
+                    <span class="h4"><span class="badge rounded-pill text-bg-primary">@genre</span></span>
+                }
+            </div>
+            <div>
+                @if (@movie.PlotSummary != null)
+                {
+                    @movie.PlotSummary.Text
+                }
+                else if(@movie.PlotOutline!=null)
+                {
+                    @movie.PlotOutline.Text
+                }
+            </div>
+            <div class="mt-3">
+                <table class="table">
+                    <tr>
+                        <th>Length</th>
+                        <td>@movie.Title.RunningTimeInMinutes m</td>
+                    </tr>
+                    @if (@movie.Title.TitleType == "tvSeries")
+                    {
+                        <tr>
+                            <th>Number of Episodes</th>
+                            <td>@movie.Title.NumberOfEpisodes</td>
+                        </tr>
+                    }
+                    <tr>
+                        <th>Realese date</th>
+                        <td>@movie.ReleaseDate</td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="mt-3">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            @if (movie.Title.Image != null)
+            {
+                
+                <img class="img-fluid" src="@movie.Title.Image.Url" width="@movie.Title.Image.Width"
+                     height="@movie.Title.Image.Height" alt="poster" />
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SearchResult>
+@if (@Model != null)
+{
+    <h1>Results for: "@TempData["Title"]"</h1>
+    <div class="d-flex flex-wrap">
+        @foreach (var item in Model)
+        {
+            @if (item.TitleType != null)
+            {
+                <div class="card m-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            @if(item.Image!=null){
+                                <img src="@item.Image.Url" class="img-fluid rounded-start" alt="@item.Title">
+                            }
+                            else
+                            {
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930" class="img-fluid rounded-start" alt="@item.Title">
+                            }
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Title <small class="text-body-secondary">(@item.Year)</small></h5>
+                                <p class="card-text"><small class="text-body-secondary">@item.TitleType</small></p>
+                                <div class="card-text">
+                                    <div class="d-grid gap-2">
+                                          <form asp-action="Details" asp-controller="list" class="w-100" method="get">
+                                            <input type="hidden" name="Id" value="@item.Id.Split("/")[2]"/>                                          
+                                        <button class="btn btn-primary w-100" type="submit">Details</button>
+                                        </form>
+                                        <form asp-action="AddToList" asp-controller="list" class="w-100">
+                                            <input type="hidden" name="Id" value="@item.Id.Split("/")[2]" />
+                                            <input type="hidden" name="Title" value="@item.Title" />
+
+                                            <button class="btn btn-success w-100" type="submit">Add to list</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+
+}
+else
+{
+    <div class="alert alert-primary container-fluid" role="alert">
+        No result found!
+    </div>
+}

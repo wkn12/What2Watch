@@ -1,0 +1,20 @@
+﻿@model UserMovieList
+<div>
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="Status" class="col-form-label"></label>
+        <select asp-for="Status" asp-items="Html.GetEnumSelectList<MovieStatus>()" class="form-control"></select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="UserScore" class="col-form-label"></label>
+        <input asp-for="UserScore" class="form-control" />
+        <span asp-validation-for="UserScore" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Note" class="col-form-label"></label>
+        <textarea asp-for="Note" class="form-control"></textarea>
+        <span asp-validation-for="Note" class="text-danger"></span>
+    </div>
+
+</div>

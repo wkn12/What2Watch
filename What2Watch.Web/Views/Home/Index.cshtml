@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@if (ViewData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">@ViewData["Error"]</div>
+}
+<div class="d-grid">
+    <div class="row">
+
+    <div class="col-md-8">
+        <partial name="Partials/_Carousel" />
+    </div>
+    <div class="col-md-4 container lead text-center">
+        <p>Ready to Watch, Non-Stop?</p>
+        <p> Let What2Watch Be Your Guide!</p>
+        <p>Get tailor-made movie and TV show suggestions in an instant.</p>
+        <p> Say hello to your endless entertainment!!</p>
+        <a class="btn btn-dark btn-lg" href='@Url.Action("Index", "Generator")'>
+        Find your entertainment
+        </a>
+
+    </div>
+    </div>
+</div>

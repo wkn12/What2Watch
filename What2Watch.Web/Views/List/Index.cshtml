@@ -1,0 +1,59 @@
+﻿@model IEnumerable<UserMovieList>;
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">@TempData["Error"]</div>
+}
+else
+{
+    
+<div>
+    <h1>Watchlist</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">@Html.DisplayNameFor(model=>model.Movie.Title)</th>
+                <th scope="col">@Html.DisplayNameFor(model=>model.Status)</th>
+                <th scope="col">@Html.DisplayNameFor(model=>model.UserScore)</th>
+                <th scope="col">@Html.DisplayNameFor(model=>model.Note)</th>
+                <th scope="col"></th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model.Select((value, i) => new { i, value }))
+            {
+                
+               var id = "#Confirm" + @movie.value.Id;
+                
+                <tr>
+                    <td>@movie.i</td>
+                    <td>@movie.value.Movie.Title</td>
+                    @switch (movie.value.Status)
+                    {
+                        case MovieStatus.Planned:
+                            <td class="text-primary">Plan to watch</td>
+                            break;
+                        case MovieStatus.Dropped:
+                            <td class="text-danger">@movie.value.Status</td>
+                            break;
+                        case MovieStatus.Completed:
+                            <td class="text-success">@movie.value.Status</td>
+                            break;
+                    }
+                    <td>@movie.value.UserScore</td>
+                    <td>@movie.value.Note</td>
+                    <td>
+                        <div class="hstack  gap-2 col-md-5 mx-auto">
+                            <partial name="Partials/_EditButton" model="movie.value" />                        
+                            <partial name="Partials/_Remove" model="movie.value" />
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+}
